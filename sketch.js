@@ -15,7 +15,7 @@ var heart1, heart2, heart3
 
 var gameState = "fight"
 
-var lose, winning, explosionSound;
+
 
 
 function preload(){
@@ -31,9 +31,7 @@ function preload(){
 
   bgImg = loadImage("assets/bg.jpeg")
 
-  lose = loadSound("assets/lose.mp3")
-  winning = loadSound("assets/win.mp3")
-  explosionSound = loadSound("assets/explosion.mp3")
+ 
 
 }
 
@@ -194,9 +192,9 @@ drawSprites();
 //displaying the score and remaining lives and bullets
 textSize(20)
   fill("white")
-text("Bullets = " + bullets,displayWidth-210,displayHeight/2-250)
-text("Score = " + score,displayWidth-200,displayHeight/2-220)
-text("Lives = " + life,displayWidth-200,displayHeight/2-280)
+
+  
+  
 
 //destroy zombie and player and display a message in gameState "lost"
 if(gameState == "lost"){
