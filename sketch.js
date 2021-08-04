@@ -1,7 +1,7 @@
 var bg,bgImg;
 var player, shooterImg, shooter_shooting;
 var zombie, zombieImg;
-
+var bat, batimg, batgroup;
 var heart1, heart2, heart3;
 var heart1Img, heart2Img, heart3Img;
 
@@ -31,7 +31,14 @@ function preload(){
 
   bgImg = loadImage("assets/bg.jpeg")
 
- 
+  batimg = loadAnimation(
+    "assets/bat1.png",
+    "assets/bat2.png",
+    "assets/bat3.png",
+    "assets/bat4.png",
+    "assets/bat5.png",
+    "assets/bat6.png"
+  );
 
 }
 
@@ -73,7 +80,7 @@ player = createSprite(displayWidth-1150, displayHeight-300, 50, 50);
     //creating groups for zombies and bullets
     bulletGroup = new Group()
     zombieGroup = new Group()
-
+  batgroup = new Group();
 
 
 }
@@ -84,6 +91,10 @@ function draw() {
 
 if(gameState === "fight"){
 
+   if (bg.x < 170) {
+    bg.x = bg.width / 2;
+  }
+  
   //displaying the appropriate image according to lives reamining
   if(life===3){
     heart3.visible = true
@@ -182,6 +193,7 @@ if(zombieGroup.isTouching(player)){
 
 //calling the function to spawn zombies
 enemy();
+    spawnbats();
 }
 
 
@@ -250,4 +262,17 @@ function enemy(){
    zombieGroup.add(zombie)
   }
 
+}
+function spawnbats() {
+  if (frameCount % 160 === 0) {
+    var bat = createSprite(width + 20, height - 300, 40, 10);
+    bat.y = Math.round(random(100, 220));
+    bat.addAnimation("flying", batimg);
+    bat.scale = 0.2;
+    bat.velocityX = -3;
+    bat.lifetime = 600;
+    bat.depth = player.depth;
+    player.depth = player.depth + 1;
+    batgroup.add(bat);
+  }
 }
